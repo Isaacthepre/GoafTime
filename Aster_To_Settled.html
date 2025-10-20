@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aster Fall Time Converter</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            background-color: #0e1116;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .converter {
+            background-color: #1c222b;
+            padding: 2em;
+            border-radius: 1em;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            width: 340px;
+        }
+        h1 {
+            color: #7cc7ff;
+            text-align: center;
+            margin-bottom: 1.2em;
+        }
+        label {
+            display: block;
+            margin-top: 0.6em;
+        }
+        input {
+            width: 100%;
+            padding: 0.4em;
+            border: none;
+            border-radius: 4px;
+            margin-top: 0.3em;
+        }
+        button {
+            width: 100%;
+            padding: 0.7em;
+            margin-top: 1em;
+            background-color: #7cc7ff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #4fa8e6;
+        }
+        .results {
+            margin-top: 1.5em;
+            padding-top: 1em;
+            border-top: 1px solid #444;
+        }
+        .swap {
+            background-color: #2e3b49;
+            color: #7cc7ff;
+        }
+        .swap:hover {
+            background-color: #3c4c5d;
+        }
+    </style>
+</head>
+<body>
+<h1>Aster Fall to Settled Galaxy Time Converter</h1>
+<div class="converter">
+    <label for="asterYears">Years Passed on Aster Fall:</label>
+    <input type="number" id="asterYears" min="0" value="0">
+
+    <label for="asterMonths">Months Passed on Aster Fall:</label>
+    <input type="number" id="asterMonths" min="0" value="0">
+
+    <label for="asterDays">Days Passed on Aster Fall:</label>
+    <input type="number" id="asterDays" min="0" value="0">
+
+    <button id="convertBtn">Convert</button>
+
+    <div class="results">
+        <label for="settleYears">Years Passed in the Settled Galaxy:</label>
+        <input type="text" id="settleYears" readonly>
+
+        <label for="settleMonths">Months Passed in the Settled Galaxy:</label>
+        <input type="text" id="settleMonths" readonly>
+
+        <label for="settleDays">Days Passed in the Settled Galaxy:</label>
+        <input type="text" id="settleDays" readonly>
+
+        <label for="settleTotal">Total Days Passed in the Settled Galaxy:</label>
+        <input type="text" id="settleTotal" readonly>
+    </div>
+
+    <button class="swap" onclick="window.location.href='Settled_To_Aster.html'">Switch to Settled → Aster Mode</button>
+
+</div>
+
+<script src="src/main.js"></script>
+
+<script>
+    document.getElementById("convertBtn").addEventListener("click", () => {
+        const years = parseFloat(document.getElementById("asterYears").value) || 0;
+        const months = parseFloat(document.getElementById("asterMonths").value) || 0;
+        const days = parseFloat(document.getElementById("asterDays").value) || 0;
+
+        const result = settleFromAster(years, months, days);
+
+        document.getElementById("settleYears").value = result.totalYears;
+        document.getElementById("settleMonths").value = result.totalMonths;
+        document.getElementById("settleDays").value = result.daysLeft;
+        document.getElementById("settleTotal").value = result.totalDays;
+    });
+</script>
+
+</body>
+</html>
